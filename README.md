@@ -16,3 +16,5 @@ There are 2 predefined users:
 2. username - b, password - b
 
 All passwords are stored as encrypted in database
+
+User can not have two the same pokemons(by name). Unique constraint (pokemon_name, user) preserve data integrity.
