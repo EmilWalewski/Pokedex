@@ -30,6 +30,15 @@ public class Pokemon {
     @ApiModelProperty(notes = "The type of the pokemon")
     private PokemonType type;
 
+    @Column(length = 3, nullable = false)
+    private int health;
+
+    @Column(length = 3, nullable = false)
+    private int attack;
+
+    @Column(length = 3, nullable = false)
+    private int defense;
+
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     @JsonIgnore
@@ -44,6 +53,9 @@ public class Pokemon {
         this.id = pokemonModel.getId();
         this.name = pokemonModel.getName();
         this.type = PokemonType.getPokemonType(pokemonModel.getType().toUpperCase());
+        this.health = pokemonModel.getHealth();
+        this.attack = pokemonModel.getAttack();
+        this.defense = pokemonModel.getDefense();
         this.user = user;
     }
 
@@ -69,6 +81,30 @@ public class Pokemon {
 
     public void setType(PokemonType type) {
         this.type = type;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
     }
 
     public User getUser() {
