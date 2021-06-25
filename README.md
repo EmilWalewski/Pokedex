@@ -2,8 +2,7 @@
 
 Set up:
 
-1. import MySQL database
-2. set appropriate credentials in application.properties file
+1. set appropriate database credentials in application.properties file
 
 Basic information:
 
