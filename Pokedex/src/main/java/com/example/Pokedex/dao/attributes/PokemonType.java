@@ -13,6 +13,24 @@ public enum PokemonType {
         this.n = n;
     }
 
+    public static PokemonType getPokemonType(Integer type){
+
+        for(PokemonType t : PokemonType.values())
+            if (t.n == type)
+                return t;
+
+        return null;
+    }
+
+    public static PokemonType getPokemonType(String type){
+
+        for(PokemonType t : PokemonType.values())
+            if (t.name().equals(type))
+                return t;
+
+        return null;
+    }
+
     public static int getNumericTypeValue(String type){
 
         for(PokemonType t : PokemonType.values())

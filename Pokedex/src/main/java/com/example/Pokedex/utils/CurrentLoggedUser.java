@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CurrentLoggedUser {
 
-    public static int getUserID(){
+    public static Long getUserID(){
 
         return ((PrincipalDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser().getId();
     }

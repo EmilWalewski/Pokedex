@@ -1,7 +1,7 @@
 package com.example.Pokedex.dao.entities;
 
-import com.example.Pokedex.annotations.isUnique;
 import com.example.Pokedex.dao.attributeConverter.PokemonTypeConverter;
+import com.example.Pokedex.dao.attributes.PokemonType;
 import com.example.Pokedex.dao.models.PokemonModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
@@ -20,7 +20,7 @@ public class Pokemon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(notes = "The unique id of the pokemon")
-    private int id;
+    private Long id;
 
     @Column(length = 60, nullable = false)
     @ApiModelProperty(notes = "The name of the pokemon")
@@ -28,12 +28,12 @@ public class Pokemon {
 
     @Convert(converter = PokemonTypeConverter.class)
     @ApiModelProperty(notes = "The type of the pokemon")
-    private String type;
+    private PokemonType type;
 
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     @JsonIgnore
-    @ApiModelProperty(notes = "The user that pokemon belongs to")
+    @ApiModelProperty(notes = "The user to whom a pokemon belongs")
     private User user;
 
 
@@ -43,15 +43,15 @@ public class Pokemon {
     public Pokemon(PokemonModel pokemonModel, User user) {
         this.id = pokemonModel.getId();
         this.name = pokemonModel.getName();
-        this.type = pokemonModel.getType().toUpperCase();
+        this.type = PokemonType.getPokemonType(pokemonModel.getType().toUpperCase());
         this.user = user;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -63,11 +63,11 @@ public class Pokemon {
         this.name = name;
     }
 
-    public String getType() {
+    public PokemonType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(PokemonType type) {
         this.type = type;
     }
 

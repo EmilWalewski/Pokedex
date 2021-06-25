@@ -1,14 +1,11 @@
 package com.example.Pokedex.exceptionHandlers;
 
 import com.example.Pokedex.exceptions.NotFoundException;
-import com.example.Pokedex.exceptions.WrongIndexException;
 import com.example.Pokedex.utils.ErrorResponse;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -17,26 +14,21 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({NotFoundException.class, WrongIndexException.class})
+    @ExceptionHandler({NotFoundException.class})
     public ResponseEntity<Object> wrongIndexException(RuntimeException ex, WebRequest request){
 
         ErrorResponse er = new ErrorResponse(HttpStatus.NOT_FOUND, Arrays.asList(ex.getMessage()));
 
-        return handleExceptionInternal(ex, er, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, er, new HttpHeaders(), er.getStatus(), request);
     }
 
     @ExceptionHandler({DataIntegrityViolationException.class})
     public ResponseEntity<Object> dataIntegrityException(RuntimeException ex, WebRequest request){
-
-        System.out.println(((org.hibernate.exception.ConstraintViolationException)ex.getCause()).getConstraintName());
 
         ErrorResponse er = new ErrorResponse(HttpStatus.BAD_REQUEST,
                 Arrays.asList("Names can not be duplicated"));

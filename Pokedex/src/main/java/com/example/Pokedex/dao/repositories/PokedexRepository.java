@@ -1,5 +1,6 @@
 package com.example.Pokedex.dao.repositories;
 
+import com.example.Pokedex.dao.attributes.PokemonType;
 import com.example.Pokedex.dao.entities.Pokemon;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,22 +16,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PokedexRepository extends JpaRepository<Pokemon, Integer> {
-
-    @Query("SELECT COUNT(p) FROM Pokemon p WHERE p.name=:name")
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    Long count(@Param("name") String name);
+public interface PokedexRepository extends JpaRepository<Pokemon, Long> {
 
     @Query("FROM Pokemon p WHERE p.user.id=:userID")
-    Page<Pokemon> findAllPokemons(Pageable request, @Param("userID") Integer userID);
+    Page<Pokemon> findAllPokemons(Pageable request, @Param("userID") Long userID);
 
     @Query("FROM Pokemon p WHERE p.id=:id and p.user.id=:userID")
-    Optional<Pokemon> findById(@Param("id")Integer id, @Param("userID") Integer userID);
+    Optional<Pokemon> findById(@Param("id")Long id, @Param("userID") Long userID);
 
     @Query("FROM Pokemon p WHERE p.name=:name and p.user.id=:userID")
-    Optional<Pokemon> findByName(@Param("name")String name, @Param("userID") Integer userID);
+    Optional<Pokemon> findByName(@Param("name")String name, @Param("userID") Long userID);
 
     @Query("FROM Pokemon p WHERE p.type=:type and p.user.id=:userID")
-    Optional<Page<Pokemon>> findByType(@Param("type") String type, Pageable page, @Param("userID") Integer userID);
+    Page<Pokemon> findByType(@Param("type") PokemonType type, Pageable page, @Param("userID") Long userID);
 
 }

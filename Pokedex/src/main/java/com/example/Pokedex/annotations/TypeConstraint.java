@@ -1,7 +1,6 @@
 package com.example.Pokedex.annotations;
 
 import com.example.Pokedex.validatorBuilder.PokemonTypeValidator;
-import com.example.Pokedex.validatorBuilder.UniqueValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

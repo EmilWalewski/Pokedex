@@ -14,14 +14,12 @@ public class RepoUtils {
     @Autowired
     private PokedexRepository repo;
 
-    /* Post constructor */
 
     @PostConstruct
     public void fillInstance() {
         instance = this;
     }
 
-    /*static methods */
 
     public static PokedexRepository getPokemonsRepository() {
         return instance.repo;

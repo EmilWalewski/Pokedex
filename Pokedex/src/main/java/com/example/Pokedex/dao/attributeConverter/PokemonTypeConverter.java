@@ -6,36 +6,17 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Convert;
 
 @Convert
-public class PokemonTypeConverter implements AttributeConverter<String, Integer> {
+public class PokemonTypeConverter implements AttributeConverter<PokemonType, Integer> {
 
     @Override
-    public Integer convertToDatabaseColumn(String pokemonType) {
+    public Integer convertToDatabaseColumn(PokemonType pokemonType) {
 
-        if (pokemonType == null)
-            return null;
-
-        switch (pokemonType){
-            case "FIRE": return 1;
-            case "EARTH": return 2;
-            case "WATER": return 3;
-            case "WIND": return 4;
-
-        }
-
-        return null;
+        return PokemonType.getNumericTypeValue(pokemonType.name());
     }
 
     @Override
-    public String convertToEntityAttribute(Integer integer) {
+    public PokemonType convertToEntityAttribute(Integer integer) {
 
-        switch (integer){
-            case 1: return "FIRE";
-            case 2: return "EARTH";
-            case 3: return "WATER";
-            case 4: return "WIND";
-
-        }
-
-        return null;
+        return PokemonType.getPokemonType(integer);
     }
 }

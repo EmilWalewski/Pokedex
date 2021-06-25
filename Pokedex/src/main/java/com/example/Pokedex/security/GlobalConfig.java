@@ -48,10 +48,9 @@ public class GlobalConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .httpBasic()
+                .authenticationEntryPoint(new CustomEntryPoint())
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .exceptionHandling().accessDeniedHandler(new CustomAuthenticationEntryPoint())
                 .and()
                 .authorizeRequests()
                 .antMatchers("/pokedex/**")

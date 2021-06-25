@@ -6,7 +6,7 @@ import javax.validation.constraints.Pattern;
 
 public class PokemonModel {
 
-    private int id;
+    private Long id;
 
     @Pattern(regexp = "^[A-Z][a-z]{1,60}", message = "The given name is wrong")
     private String name;
@@ -17,17 +17,17 @@ public class PokemonModel {
     public PokemonModel() {
     }
 
-    public PokemonModel(int id, String name, String type) {
+    public PokemonModel(Long id, String name, String type) {
         this.id = id;
         this.name = name;
         this.type = type;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
