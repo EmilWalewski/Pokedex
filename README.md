@@ -20,14 +20,20 @@ If name, type or id is not correct then exceptions are handled and appropriate a
 To post:
 {
   "name": "Chamander",
-  "type": "Fire"
+  "type": "Fire",
+  "heath": 100,
+  "attack": 100,
+  "defense": 100
 }
 
 To update:
 {
-	"id": 17,
-  "name": "Chamander",
-   type": "Wind"
+   "id": 17,
+  "name": "Chaman",
+  "type": "Fire",
+  "heath": 30,
+  "attack": 20,
+  "defense": 60
 }
 
 There are 2 predefined users: 
