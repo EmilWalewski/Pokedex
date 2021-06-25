@@ -37,4 +37,4 @@ There are 2 predefined users:
 
 All passwords are stored as encrypted in database
 
-Each user have access add, update or delete only own pokemons. User can not have two the same pokemons(by name). Unique constraint (pokemon_name, user) preserve data integrity.
+Each user can add, update or delete only own pokemons. User can not have two the same pokemons(by name). Unique constraint (pokemon_name, user) preserve data integrity.
